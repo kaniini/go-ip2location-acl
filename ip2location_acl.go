@@ -9,7 +9,7 @@ type IP2LocationDB struct {
 	tree *netradix.NetRadixTree
 }
 
-func OpenIP2LocationDB(ipv4_db *string, ipv6_db *string) (*IP2LocationDB, error) {
+func OpenIP2LocationDB(ipv4_db string, ipv6_db string) (*IP2LocationDB, error) {
 	db := &IP2LocationDB {nil}
 
 	tree, error := netradix.NewNetRadixTree()
@@ -19,12 +19,12 @@ func OpenIP2LocationDB(ipv4_db *string, ipv6_db *string) (*IP2LocationDB, error)
 
 	db.tree = tree
 
-	if ipv4_db != nil {
-		db.LoadIP2LocationDB(*ipv4_db)
+	if ipv4_db != "" {
+		db.LoadIP2LocationDB(ipv4_db)
 	}
 
-	if ipv6_db != nil {
-		db.LoadIP2LocationDB(*ipv6_db)
+	if ipv6_db != "" {
+		db.LoadIP2LocationDB(ipv6_db)
 	}
 
 	return db, nil
